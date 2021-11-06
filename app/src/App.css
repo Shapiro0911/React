@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+  background-color: #282c34;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  height: 1000px;
 }
 
 .App-logo {
@@ -40,4 +44,32 @@
 .container {
   margin: 0 auto;
   max-width: 1140px
+}
+
+.messageSubmit {
+  height: 56px;
+}
+
+.messageInput {
+  background-color: silver;
+  height: 50px;
+  width: 100%;
+  outline: none;
+  border-radius: 5px;
+}
+
+.chat {
+  display: flex;
+}
+
+.messages {
+  flex-grow: 2;
+}
+
+.messageList {
+  flex-grow: 1;
+}
+
+.messageForm {
+  display: flex;
 }
