@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Button } from '@mui/material';
-
+import './Form.css'
 
 export const Form = ({ sendMessage }) => {
     const [value, setValue] = useState('');
