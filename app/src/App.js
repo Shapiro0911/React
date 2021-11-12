@@ -2,17 +2,13 @@ import { useEffect, useState } from 'react';
 import './App.css';
 //import { Message } from './components/Message/Message'
 import { Form } from './components/Form/Form'
+import { MessageList } from './components/messageList/messageList'
 
 function App() {
   const [messages, setMessages] = useState([]);
 
   const handleMessage = (text) => {
-    if (messages.length === 0) {
-      setMessages([{ id: 0, text: text, author: 'human' }]);
-    }
-    else {
-      setMessages([...messages, { id: messages[messages.length - 1].id + 1, text: text, author: 'human' }]);
-    }
+    setMessages([...messages, { id: (messages[messages.length - 1]?.id || -1) + 1, text: text, author: 'human' }]);
   }
 
   useEffect(() => {
@@ -25,10 +21,15 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        {messages.map((message) => <div key={message.id}>{message.text}</div>)}
-        <Form sendMessage={handleMessage} />
-      </header>
+      <div className="chat container">
+        <div className="messageList">
+          <MessageList />
+        </div>
+        <div className="messages">
+          {messages.map((message) => <div key={message.id}>{message.text}</div>)}
+          <Form sendMessage={handleMessage} />
+        </div>
+      </div>
     </div>
   );
 }
