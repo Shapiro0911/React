@@ -1,0 +1,7 @@
+.chatList {
+    flex-grow: 1;
+}
+
+.chat {
+    display: flex;
+}

@@ -1,0 +1,15 @@
+.messageSubmit {
+    height: 56px;
+}
+  
+.messageInput {
+    background-color: silver;
+    height: 50px;
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+}
+
+.messageForm {
+    display: flex;
+}

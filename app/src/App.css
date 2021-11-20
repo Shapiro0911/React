@@ -45,31 +45,3 @@
   margin: 0 auto;
   max-width: 1140px
 }
-
-.messageSubmit {
-  height: 56px;
-}
-
-.messageInput {
-  background-color: silver;
-  height: 50px;
-  width: 100%;
-  outline: none;
-  border-radius: 5px;
-}
-
-.chat {
-  display: flex;
-}
-
-.messages {
-  flex-grow: 2;
-}
-
-.messageList {
-  flex-grow: 1;
-}
-
-.messageForm {
-  display: flex;
-}
