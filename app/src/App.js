@@ -1,3 +1,4 @@
+import React from "react";
 import { BrowserRouter, Link, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux'
 import './App.css'
@@ -26,7 +27,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='chats'>
             <Route index element={<ChatList />} />
-            <Route path=':chatId' element={<Chats />} />
+            <Route path=':chatID' element={<Chats />} />
           </Route>
           <Route path='profile' element={<Profile />} />
           <Route path='*' element={<h3>Error 404</h3>} />

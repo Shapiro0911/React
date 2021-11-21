@@ -1,1 +1,1 @@
-export const profileCheckbox = (state) => state.profile;
+export const profileCheckbox = (state) => (state.profile);

@@ -5,7 +5,8 @@ import { ListItemButton, ListItemText } from '@mui/material';
 
 export const ChatItem = ({ chat }) => {
     const dispatch = useDispatch();
-    const handleDeleteChat = () => {
+    const handleDeleteChat = (/*deleteChat*/) => {
+        //deleteChat.stopPropagation();
         dispatch(deleteChat(chat.id));
     };
 

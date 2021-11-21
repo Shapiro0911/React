@@ -1,4 +1,6 @@
-import { combineReducers, createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
+import { chatReducer } from './chat/reducer';
+import { chatsReducer } from './chats/reducer';
 import { profileReducer } from './profile/reducer';
 import { chatsReducer } from './chats/reducer';
 import { chatReducer } from './chat/reducer';

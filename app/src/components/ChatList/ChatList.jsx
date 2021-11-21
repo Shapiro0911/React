@@ -1,26 +1,27 @@
-import React, { useState } from 'react';
 import './ChatList.css'
-import { useSelector, useDispatch } from 'react-redux';
-import { selectChat } from '../../store/chats/selector'
-import { ChatItem } from '../ChatItem/ChatItem';
+import { useDispatch, useSelector } from 'react-redux';
 import { addChat } from '../../store/chats/actions';
+import { useState } from 'react';
 import { TextField } from "@mui/material";
+import { ChatItem } from '../ChatItem/ChatItem';
+import { selectChat } from '../../store/chats/selector';
 
 export const ChatList = () => {
-    const chatList = useSelector(selectChat)
-    const [value, setValue] = useState("");
+    const chatList = useSelector(selectChat);
     const dispatch = useDispatch();
+    const [value, setValue] = useState("");
 
     const handleChange = (name) => {
         setValue(name.target.value);
     };
 
-    const handleSubmit = (form) => {
+    const handleAddChat = (form) => {
         form.preventDefault();
         const newID = `chat${Date.now()}`;
         dispatch(addChat({ name: value, id: newID }));
         setValue("");
     };
+
     return (
         <div className="chatList">
             <ul>
@@ -30,9 +31,9 @@ export const ChatList = () => {
                     </li>
                 )}
             </ul>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleAddChat} className="messageForm">
                 <TextField value={value} onChange={handleChange} />
-                <button>Add Chat</button>
+                <button>Add chat</button>
             </form>
         </div>
     )

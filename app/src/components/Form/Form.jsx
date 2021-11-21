@@ -12,7 +12,11 @@ export const Form = ({ sendMessage }) => {
 
     const handleSubmit = (form) => {
         form.preventDefault();
-        sendMessage(value);
+        sendMessage({
+            text: value,
+            author: 'human',
+            id: `mes-${Date.now()}`,
+        });
         setValue('');
         inputRef.current.focus();
     }

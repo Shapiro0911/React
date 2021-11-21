@@ -13,6 +13,6 @@ export const profileReducer = (state = initialState, action) => {
                 checkbox: !state.checkbox
             }
         default:
-            return state
+            return state;
     }
 }
