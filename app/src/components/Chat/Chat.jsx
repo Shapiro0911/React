@@ -1,26 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import { Form } from '../Form/Form'
 import './Chat.css'
+import { Form } from '../Form/Form'
+import { useSelector, useDispatch } from 'react-redux'
+import { useCallback, useEffect } from 'react';
+import { sendMessage } from '../../store/chat/actions';
+import { Navigate, useParams } from "react-router";
+import { messagesForCurrentChat } from '../../store/chat/selector';
 
 export const Chat = () => {
-    const [messages, setMessages] = useState([]);
+    const messages = useSelector(messagesForCurrentChat);
+    const dispatch = useDispatch();
+    const { chatID } = useParams();
 
-    const handleMessage = (text) => {
-        setMessages([...messages, { id: (messages[messages.length - 1]?.id || -1) + 1, text: text, author: 'human' }]);
-    }
+    const handleSendMessage = useCallback(
+        (newMessage) => {
+            dispatch(sendMessage(chatID, newMessage));
+        },
+        [dispatch, chatID]
+    );
 
     useEffect(() => {
-        if (messages.length !== 0 && messages[messages.length - 1].author === "human") {
+        if (messages[chatID]?.length !== 0 && messages[chatID]?.[messages[chatID]?.length - 1].author === "human") {
             setTimeout(() => {
-                setMessages([...messages, { id: messages[messages.length - 1].id + 1, text: "Hello", author: 'bot' }])
+                handleSendMessage({ id: `mes-${Date.now()}`, text: "Hello", author: 'bot' })
             }, 1500)
         }
+        // eslint-disable-next-line
     }, [messages])
+
+    if (!messages[chatID]) {
+        return <Navigate replace to="/chats" />;
+    }
 
     return (
         <div className="messages">
-            {messages.map((message) => <div key={message.id}>{message.text}</div>)}
-            <Form sendMessage={handleMessage} />
+            {messages[chatID].map((message) => <div key={message.id}>{message.text}</div>)}
+            <Form sendMessage={handleSendMessage} />
         </div>
     )
 }

@@ -1,0 +1,1 @@
+export const profileCheckbox = (state) => (state.profile);
