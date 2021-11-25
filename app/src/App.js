@@ -9,6 +9,7 @@ import { Home } from './components/Home/Home'
 import { Profile } from './components/Profile/Profile'
 import { store, persistor } from './store'
 import { CircularProgress } from "@mui/material";
+import { Characters } from './components/Characters/Characters'
 
 function App() {
   return (
@@ -25,6 +26,9 @@ function App() {
             <li>
               <Link to='/profile'>Profile</Link>
             </li>
+            <li>
+              <Link to='/characters'>Characters</Link>
+            </li>
           </ul>
           <Routes>
             <Route path='/' element={<Home />} />
@@ -33,6 +37,7 @@ function App() {
               <Route path=':chatID' element={<Chats />} />
             </Route>
             <Route path='profile' element={<Profile />} />
+            <Route path='characters' element={<Characters />} />
             <Route path='*' element={<h3>Error 404</h3>} />
           </Routes>
         </BrowserRouter>
