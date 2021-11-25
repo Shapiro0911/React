@@ -1,8 +1,8 @@
 import './Chat.css'
 import { Form } from '../Form/Form'
 import { useSelector, useDispatch } from 'react-redux'
-import { useCallback, useEffect } from 'react';
-import { sendMessage } from '../../store/chat/actions';
+import { useCallback } from 'react';
+import { sendMessageWithReply } from '../../store/chat/actions';
 import { Navigate, useParams } from "react-router";
 import { messagesForCurrentChat } from '../../store/chat/selector';
 
@@ -13,19 +13,10 @@ export const Chat = () => {
 
     const handleSendMessage = useCallback(
         (newMessage) => {
-            dispatch(sendMessage(chatID, newMessage));
+            dispatch(sendMessageWithReply(chatID, newMessage));
         },
         [dispatch, chatID]
     );
-
-    useEffect(() => {
-        if (messages[chatID]?.length !== 0 && messages[chatID]?.[messages[chatID]?.length - 1].author === "human") {
-            setTimeout(() => {
-                handleSendMessage({ id: `mes-${Date.now()}`, text: "Hello", author: 'bot' })
-            }, 1500)
-        }
-        // eslint-disable-next-line
-    }, [messages])
 
     if (!messages[chatID]) {
         return <Navigate replace to="/chats" />;

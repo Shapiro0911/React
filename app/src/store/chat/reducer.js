@@ -24,7 +24,7 @@ export const chatReducer = (state = initialMessages, { payload, type }) => {
         }
         case DELETE_CHAT: {
             const messages = { ...state };
-            delete messages[payload.chatId];
+            delete messages[payload];
             return messages;
         }
         default:
