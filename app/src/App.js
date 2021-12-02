@@ -10,6 +10,7 @@ import { Profile } from './components/Profile/Profile'
 import { store, persistor } from './store'
 import { CircularProgress } from "@mui/material";
 import { Characters } from './components/Characters/Characters'
+import { SignUp } from './components/SignUp/SignUp'
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           </ul>
           <Routes>
             <Route path='/' element={<Home />} />
+            <Route path="/signup" element={<SignUp />} />
             <Route path='chats'>
               <Route index element={<ChatList />} />
               <Route path=':chatID' element={<Chats />} />
