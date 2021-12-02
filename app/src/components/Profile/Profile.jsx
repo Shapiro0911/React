@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleCheckbox } from '../../store/profile/actions';
-import { profileCheckbox } from '../../store/profile/selector';
+import { profileCheckbox } from '../../store/profile/selectors';
 
 export const Profile = () => {
     const profile = useSelector(profileCheckbox);

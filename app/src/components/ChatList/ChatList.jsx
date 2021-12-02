@@ -4,7 +4,7 @@ import { addChat } from '../../store/chats/actions';
 import { useState } from 'react';
 import { TextField } from "@mui/material";
 import { ChatItem } from '../ChatItem/ChatItem';
-import { selectChat } from '../../store/chats/selector';
+import { selectChat } from '../../store/chats/selectors';
 
 export const ChatList = () => {
     const chatList = useSelector(selectChat);
