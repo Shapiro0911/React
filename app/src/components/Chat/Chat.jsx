@@ -2,41 +2,35 @@ import './Chat.css'
 import { Form } from '../Form/Form'
 import { useSelector, useDispatch } from 'react-redux'
 import { useCallback, useEffect } from 'react';
-import { sendMessageWithReply } from '../../store/chat/actions';
+//import { sendMessageWithReply } from '../../store/chat/actions';
 import { Navigate, useParams } from "react-router";
 import { messagesForCurrentChat } from '../../store/chat/selectors';
 import { getChatMsgsListRefByID } from '../../services/firebase';
 import { push } from 'firebase/database';
 
-import { useState } from 'react';
-import { onValue } from 'firebase/database';
-import { messagesRef } from '../../services/firebase';
+import { initMessagesTracking } from '../../store/chat/actions';
 
 export const Chat = () => {
-    //const messages = useSelector(messagesForCurrentChat);
+    const messages = useSelector(messagesForCurrentChat);
     const dispatch = useDispatch();
     const { chatID } = useParams();
-    const [messages, setMsgs] = useState({});
 
     useEffect(() => {
-        onValue(messagesRef, (snapshot) => {
-            const chatMessages = {};
-            snapshot.forEach((chatMsgsSnap) => {
-                chatMessages[chatMsgsSnap.key] = Object.values(
-                    chatMsgsSnap.val().chatMessageList || {}
-                );
-            });
-            setMsgs(chatMessages);
-        });
+        dispatch(initMessagesTracking(chatID))
+
+        // eslint-disable-next-line
     }, []);
 
     const handleSendMessage = useCallback(
         (newMessage) => {
             push(getChatMsgsListRefByID(chatID), newMessage);
         },
-        [dispatch, chatID]
+        [chatID]
     );
 
+    if (!messages[chatID]) {
+        return <Navigate replace to="/chats" />;
+    }
 
     return (
         <div className="messages">
