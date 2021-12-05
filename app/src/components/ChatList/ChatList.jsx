@@ -1,7 +1,7 @@
 import './ChatList.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { addChat } from '../../store/chats/actions';
-import { useState } from 'react';
+import { addChat, initChatsTracking } from '../../store/chats/actions';
+import { useEffect, useState } from 'react';
 import { TextField } from "@mui/material";
 import { ChatItem } from '../ChatItem/ChatItem';
 import { selectChat } from '../../store/chats/selectors';
@@ -10,6 +10,10 @@ export const ChatList = () => {
     const chatList = useSelector(selectChat);
     const dispatch = useDispatch();
     const [value, setValue] = useState("");
+    useEffect(() => {
+        dispatch(initChatsTracking());
+        // eslint-disable-next-line
+    }, [])
 
     const handleChange = (name) => {
         setValue(name.target.value);
@@ -21,7 +25,6 @@ export const ChatList = () => {
         dispatch(addChat({ name: value, id: newID }));
         setValue("");
     };
-
     return (
         <div className="chatList">
             <ul>
