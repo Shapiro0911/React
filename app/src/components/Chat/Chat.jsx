@@ -17,7 +17,6 @@ export const Chat = () => {
 
     useEffect(() => {
         dispatch(initMessagesTracking(chatID))
-
         // eslint-disable-next-line
     }, []);
 
