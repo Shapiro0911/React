@@ -1,17 +1,13 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { toggleCheckbox } from '../../store/profile/actions';
-import { profileCheckbox } from '../../store/profile/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { profileInfo } from '../../store/profile/selectors';
 import { logOut } from '../../services/firebase';
 import { useState } from 'react';
+import { signOut } from '../../store/profile/actions';
 
 export const Profile = () => {
-    const profile = useSelector(profileCheckbox);
-    const dispatch = useDispatch();
+    const profile = useSelector(profileInfo);
     const [user, setUser] = useState("");
-
-    const handleChange = () => {
-        dispatch(toggleCheckbox);
-    }
+    const dispatch = useDispatch();
 
     const handleUsernameChange = (text) => {
         setUser(text.target.value);
@@ -19,7 +15,8 @@ export const Profile = () => {
 
     const handleLogOut = async () => {
         try {
-            await logOut()
+            await logOut();
+            dispatch(signOut());
         }
         catch (err) {
             console.log(err);
@@ -28,8 +25,7 @@ export const Profile = () => {
 
     return (
         <form>
-            <input type="checkbox" checked={profile.checkbox} onChange={handleChange} />
-            <span>{profile.name}</span>
+            <span>{profile.userID}</span>
             <input type="text" value={user} onChange={handleUsernameChange} />
             <button onClick={handleLogOut}>Log Out</button>
         </form>

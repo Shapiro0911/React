@@ -1,7 +1,7 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
 import { profileReducer } from './profile/reducer';
 import { chatsReducer } from './chats/reducer';
-import { chatReducer } from './chat/reducer';
+import { chatMsgsReducer } from './chatMsgs/reducer';
 import thunk from 'redux-thunk'
 import storage from 'redux-persist/lib/storage'
 import { persistReducer, persistStore } from 'redux-persist';
@@ -12,7 +12,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const config = {
     key: 'messanger',
     storage,
-    blacklist: ['profile', 'characters']
+    blacklist: ['characters']
 }
 
 const persistedReducer = persistReducer(
@@ -20,7 +20,7 @@ const persistedReducer = persistReducer(
     combineReducers({
         profile: profileReducer,
         chats: chatsReducer,
-        chat: chatReducer,
+        chatMsgs: chatMsgsReducer,
         characters: charactersReducer
     })
 );

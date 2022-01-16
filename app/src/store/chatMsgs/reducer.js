@@ -2,7 +2,7 @@ import { SEND_MESSAGE, DELETE_MESSAGE, SET_MESSAGES } from './actions'
 
 const initialMessages = {};
 
-export const chatReducer = (state = initialMessages, { payload, type }) => {
+export const chatMsgsReducer = (state = initialMessages, { payload, type }) => {
     switch (type) {
         case SEND_MESSAGE: {
             return {

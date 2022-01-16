@@ -1,5 +1,5 @@
 import { onValue } from "firebase/database";
-import { messagesRef } from "../../services/firebase";
+import { messagesRef, usersRef } from "../../services/firebase";
 
 export const SEND_MESSAGE = 'CHAT::SEND_MESSAGE';
 export const DELETE_MESSAGE = 'CHAT::DELETE_MESSAGE';
@@ -35,13 +35,24 @@ export const sendMessageWithReply = (chatID, newMessage) => (dispatch) => {
     }
 }
 
-export const initMessagesTracking = () => (dispatch) => {
+export const initMessagesTracking = () => (dispatch, getState) => {
     onValue(messagesRef, (snapshot) => {
         const chatMessages = {};
         snapshot.forEach((chatMsgsSnap) => {
-            chatMessages[chatMsgsSnap.key] = Object.values(
-                chatMsgsSnap.val().chatMessageList || {}
-            );
+            onValue(usersRef, (snapshot) => {
+                snapshot.forEach((userSnap) => {
+                    if (userSnap.key === getState().profile.userID) {
+                        const [...chats] = Object.values(userSnap.val().chats || {})
+                        for (let i = 0; i < chats.length; i++) {
+                            if (chatMsgsSnap.key === chats[i].id) {
+                                chatMessages[chatMsgsSnap.key] = Object.values(
+                                    chatMsgsSnap.val().chatMessageList || {}
+                                );
+                            }
+                        }
+                    }
+                });
+            })
         });
         dispatch(setMessages(chatMessages));
     });

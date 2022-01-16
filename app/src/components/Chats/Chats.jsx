@@ -5,7 +5,7 @@ import './Chats.css'
 export const Chats = () => {
     return (
         <div className="App">
-            <div className="chat container">
+            <div className="chat">
                 <ChatList />
                 <Chat />
             </div>

@@ -1,0 +1,1 @@
+export const messagesForCurrentChat = (state) => state.chatMsgs;
