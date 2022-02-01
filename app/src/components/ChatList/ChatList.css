@@ -1,12 +1,9 @@
 .chatList {
     display: flex;
     flex-direction: column;
-}
-
-ul {
-    margin: unset;
-}
-
-li {
-    list-style-type: none;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 100vh;
+    border-right: 1px solid lightgrey;
+    width: 522px;
 }

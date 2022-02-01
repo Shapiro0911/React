@@ -1,8 +1,10 @@
-import { SIGN_IN, SIGN_OUT } from "./actions";
+import { SIGN_IN, SIGN_OUT, SIGN_UP } from "./actions";
 
 const initialState = {
     authed: false,
     userID: '',
+    username: '',
+    userEmail: ''
 }
 
 export const profileReducer = (state = initialState, { payload, type }) => {
@@ -13,11 +15,16 @@ export const profileReducer = (state = initialState, { payload, type }) => {
                 authed: true,
                 userID: payload
             };
-        case SIGN_OUT:
+        case SIGN_UP:
             return {
                 ...state,
-                authed: false,
-                userID: ''
+                userID: payload.userID,
+                username: payload.userInfo.username,
+                userEmail: payload.userInfo.userEmail
+            }
+        case SIGN_OUT:
+            return {
+                ...state = { ...initialState }
             };
         default:
             return state;

@@ -24,9 +24,11 @@ export const SignForm = ({ onSubmit, loading, error }) => {
     return (
         <>
             <form className="signForm">
-                <input type="email" placeholder="example@gmail.com" className="messageInput" value={email} onChange={handleChangeEmail} autoFocus />
-                <input type="password" placeholder="Password" className="messageInput" value={password} onChange={handleChangePassword} />
-                <Button onClick={handleSubmit} className="messageSubmit" variant="contained">Submit</Button>
+                <label htmlFor="login-email" className="login-label">Email</label>
+                <input type="email" placeholder="example@gmail.com" className="msg-input login-input" id="login-email" value={email} onChange={handleChangeEmail} autoFocus />
+                <label htmlFor="login-password" className="login-label">password</label>
+                <input type="password" placeholder="Password" className="msg-input login-input" id="login-password" value={password} onChange={handleChangePassword} />
+                <Button onClick={handleSubmit} variant="contained">Login</Button>
             </form>
             {error && <h4>{error}</h4>}
         </>

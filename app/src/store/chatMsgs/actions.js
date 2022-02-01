@@ -38,10 +38,11 @@ export const sendMessageWithReply = (chatID, newMessage) => (dispatch) => {
 export const initMessagesTracking = () => (dispatch, getState) => {
     onValue(messagesRef, (snapshot) => {
         const chatMessages = {};
+        const curUser = getState().profile.userID
         snapshot.forEach((chatMsgsSnap) => {
             onValue(usersRef, (snapshot) => {
                 snapshot.forEach((userSnap) => {
-                    if (userSnap.key === getState().profile.userID) {
+                    if (userSnap.key === curUser) {
                         const [...chats] = Object.values(userSnap.val().chats || {})
                         for (let i = 0; i < chats.length; i++) {
                             if (chatMsgsSnap.key === chats[i].id) {

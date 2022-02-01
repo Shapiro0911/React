@@ -26,7 +26,7 @@ export const initChatsTracking = () => (dispatch, getState) => {
     })
 }
 
-export const deleteChat = (chatID) => () => {
-    remove(getChatRefByID(chatID));
+export const deleteChat = (userID, chatID) => () => {
+    remove(getChatRefByID(userID, chatID));
     remove(getChatMsgsRefByID(chatID));
 }

@@ -1,15 +1,17 @@
 import { Link } from "react-router-dom";
 import { signUp } from "../../services/firebase";
-import { SignForm } from "../SignForm/SignForm"
+import { SignUpForm } from "../SignUpForm/SignUpForm"
 import { useState } from "react";
 
 export const SignUp = () => {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
+
     const handleSignUp = async (email, password) => {
         setLoading(true);
         try {
-            await signUp(email, password);
+            const curUserID = await signUp(email, password);
+            return curUserID;
         }
         catch (err) {
             setError(err.message);
@@ -20,10 +22,12 @@ export const SignUp = () => {
     }
 
     return (
-        <>
-            <SignForm onSubmit={handleSignUp} error={error} loading={loading} />
-            <Link to='/'>Already have an account?</Link>
-        </>
+        <div className="sign-screen">
+            <SignUpForm onSubmit={handleSignUp} error={error} loading={loading} />
+            <div className="login-opt">
+                <Link to='/' className="link">Already have an account?</Link>
+            </div>
+        </div>
     )
 }
 

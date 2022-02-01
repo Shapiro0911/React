@@ -2,31 +2,53 @@ import './Chat.css'
 import { Form } from '../Form/Form'
 import { useSelector } from 'react-redux'
 import { useCallback } from 'react';
-//import { sendMessageWithReply } from '../../store/chat/actions';
-import { Navigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import { messagesForCurrentChat } from '../../store/chatMsgs/selectors';
-import { getChatMsgsListRefByID } from '../../services/firebase';
-import { push } from 'firebase/database';
+import { getChatMsgsListRefByID, getChatMsgsRefByID } from '../../services/firebase';
+import { push, update } from 'firebase/database';
+import { profileID } from '../../store/profile/selectors';
+import { useEffect } from 'react';
 
 export const Chat = () => {
     const messages = useSelector(messagesForCurrentChat);
+    const curUser = useSelector(profileID);
     const { chatID } = useParams();
 
     const handleSendMessage = useCallback(
         (newMessage) => {
+            const statusUpdate = {
+                empty: false
+            }
+
             push(getChatMsgsListRefByID(chatID), newMessage);
+            update(getChatMsgsRefByID(chatID), statusUpdate);
         },
         [chatID]
     );
 
-    if (!messages[chatID]) {
-        return <Navigate replace to="/chats" />;
-    }
+    useEffect(() => {
+        const chatMsgs = document.getElementsByClassName("chat-msgs");
+        chatMsgs[0].scrollTop = chatMsgs[0]?.scrollHeight;
+    }, [chatID, messages])
 
     return (
-        <div className="messages">
-            {messages[chatID]?.map((message) => <div key={message.id}>{message.text}</div>)}
+        <div className="chat">
+            <div className="chat-msgs">
+                {messages[chatID]?.map((message) => <div key={message.id}>
+                    {message.author === curUser ?
+                        <div className={`msg-block curUserTrue`}>
+                            <p className="msg-author">{message.author}</p>
+                            <p className="msg-text">{message.text}</p>
+                        </div> :
+                        <div className={`msg-block curUserFalse`}>
+                            <p className="msg-author">{message.author}</p>
+                            <p className="msg-text">{message.text}</p>
+                        </div>
+                    }
+                </div>)}
+            </div>
             <Form sendMessage={handleSendMessage} />
         </div>
     )
 }
+

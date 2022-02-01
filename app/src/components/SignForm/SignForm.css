@@ -1,5 +1,16 @@
 .signForm {
     display: flex;
     flex-direction: column;
-    max-width: 500px;
+    min-width: 500px;
+}
+
+.login-input {
+    margin-bottom: 14px;
+}
+
+.login-label {
+    color: black;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    margin-right: auto;
 }

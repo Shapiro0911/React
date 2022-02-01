@@ -1,9 +1,13 @@
 import { useState, useRef } from 'react';
-import { Button } from '@mui/material';
 import './Form.css'
+import { useSelector } from 'react-redux';
+import { profileID } from '../../store/profile/selectors'
+import { Icon } from '@iconify/react';
+import telegramPlane from '@iconify/icons-fa-brands/telegram-plane';
 
 export const Form = ({ sendMessage }) => {
     const [value, setValue] = useState('');
+    const curUser = useSelector(profileID)
     const inputRef = useRef(null);
 
     const handleChange = (text) => {
@@ -14,7 +18,7 @@ export const Form = ({ sendMessage }) => {
         form.preventDefault();
         sendMessage({
             text: value,
-            author: 'human',
+            author: curUser,
             id: `mes-${Date.now()}`,
         });
         setValue('');
@@ -22,9 +26,11 @@ export const Form = ({ sendMessage }) => {
     }
 
     return (
-        <form className="messageForm">
-            <input ref={inputRef} placeholder="Write a message..." className="messageInput" value={value} onChange={handleChange} autoFocus />
-            <Button onClick={handleSubmit} className="messageSubmit" variant="contained">Submit</Button>
+        <form className="msg-form">
+            <input ref={inputRef} placeholder="Write a message..." className="msg-input" value={value} onChange={handleChange} autoFocus />
+            <button onClick={handleSubmit} className="msg-submit">
+                <Icon className="plane-icon" icon={telegramPlane} />
+            </button>
         </form>
     )
 }

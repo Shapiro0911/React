@@ -4,13 +4,14 @@ import { addChat, initChatsTracking } from '../../store/chats/actions';
 import { useEffect, useState } from 'react';
 import { TextField } from "@mui/material";
 import { ChatItem } from '../ChatItem/ChatItem';
+import { Navigation } from '../Navigation/Navigation';
 import { selectChat } from '../../store/chats/selectors';
-import { profileInfo } from '../../store/profile/selectors';
+import { profileID } from '../../store/profile/selectors';
 import { initMessagesTracking } from '../../store/chatMsgs/actions';
 
 export const ChatList = () => {
     const chatList = useSelector(selectChat);
-    const profile = useSelector(profileInfo);
+    const profile = useSelector(profileID);
     const dispatch = useDispatch();
     const [value, setValue] = useState("");
     useEffect(() => {
@@ -27,12 +28,13 @@ export const ChatList = () => {
     const handleAddChat = (form) => {
         form.preventDefault();
         const newID = `chat${Date.now()}`;
-        dispatch(addChat(profile.userID, { name: value, id: newID }));
+        dispatch(addChat(profile, { name: value, id: newID }));
         setValue("");
     };
 
     return (
         <div className="chatList">
+            <Navigation />
             <ul>
                 {chatList.map((chat) =>
                     <li key={chat.id}>

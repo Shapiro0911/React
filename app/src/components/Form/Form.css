@@ -1,15 +1,34 @@
-.messageSubmit {
-    height: 56px;
+.msg-submit {
+    width: 60px;
+    border-radius: 100%;
+    background-color: rgb(43, 107, 190);
+    border: none;
+    cursor: pointer;
 }
   
-.messageInput {
-    background-color: silver;
-    height: 50px;
+.msg-input {
+    height: 56px;
     width: 100%;
-    outline: none;
-    border-radius: 5px;
+    outline: lightblue;
+    border: none;
+    outline: lightblue;
+    padding: 14px;
+    border-radius: 40px;
+    background-color: rgb(243, 243, 243);
+    flex-grow: 1;
+    box-sizing: border-box;
+    margin-right: 14px;
 }
 
-.messageForm {
+.msg-form {
     display: flex;
+    clear: both;
+    margin-left: 180px;
+    margin-right: 180px;
+    margin-bottom: 14px;
+}
+
+.plane-icon {
+    color: white;
+    font-size: 22px;
 }

@@ -1,0 +1,11 @@
+.sign-screen {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    margin: auto;
+    margin-top: 20vh;
+}
+
+.login-opt {
+    margin-top: 14px;
+}

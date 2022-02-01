@@ -1,0 +1,18 @@
+.return {
+    color: black;
+    font-size: 18px;
+}
+
+.profile {
+    border-right: 1px solid lightgrey;
+    padding: 14px;
+    font-size: 19.7px;
+}
+
+.profile-info {
+    color: black;
+}
+
+.profile-back {
+    flex-grow: 2;
+}

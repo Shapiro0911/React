@@ -4,11 +4,9 @@ import './Chats.css'
 
 export const Chats = () => {
     return (
-        <div className="App">
-            <div className="chat">
-                <ChatList />
-                <Chat />
-            </div>
+        <div className="chats">
+            <ChatList />
+            <Chat />
         </div>
     )
 }
