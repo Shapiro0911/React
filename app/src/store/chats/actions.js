@@ -1,5 +1,4 @@
-import { usersRef } from "../../services/firebase";
-import { getChatMsgsRefByID, getChatRefByID } from "../../services/firebase";
+import { getChatMsgsRefByID, getChatRefByID, usersRef } from "../../services/firebase";
 import { set, onValue, remove } from "firebase/database";
 
 export const SET_CHATS = 'CHATS::SET_CHATS';
@@ -14,11 +13,11 @@ export const addChat = (userID, chat) => () => {
     set(getChatMsgsRefByID(chat.id), { empty: true })
 }
 
-export const initChatsTracking = () => (dispatch, getState) => {
+export const initChatsTracking = (userID) => (dispatch) => {
     onValue(usersRef, (snapshot) => {
         const chats = [];
         snapshot.forEach((userSnap) => {
-            if (userSnap.key === getState().profile.userID) {
+            if (userSnap.key === userID) {
                 chats.push(...Object.values(userSnap.val().chats || {}))
             }
         });

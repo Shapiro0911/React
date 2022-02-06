@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { profileName } from '../../store/profile/selectors';
+import { profileInfo } from '../../store/profile/selectors';
 import { logOut } from '../../services/firebase';
 import { useState } from 'react';
 import { signOut } from '../../store/profile/actions';
@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import './Profile.css'
 
 export const Profile = () => {
-    const username = useSelector(profileName);
+    const profile = useSelector(profileInfo);
     const [user, setUser] = useState("");
     const dispatch = useDispatch();
 
@@ -34,7 +34,7 @@ export const Profile = () => {
                     <FontAwesomeIcon className='return' icon={faArrowLeft} />
                 </Link>
                 <form className="profile-info">
-                    <span>{username}</span>
+                    <span>{profile.username}</span>
                     <input type="text" value={user} onChange={handleUsernameChange} />
                     <button onClick={handleLogOut}>Log Out</button>
                 </form>

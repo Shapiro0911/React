@@ -6,12 +6,12 @@ import { useParams } from "react-router";
 import { messagesForCurrentChat } from '../../store/chatMsgs/selectors';
 import { getChatMsgsListRefByID, getChatMsgsRefByID } from '../../services/firebase';
 import { push, update } from 'firebase/database';
-import { profileID } from '../../store/profile/selectors';
+import { profileInfo } from '../../store/profile/selectors';
 import { useEffect } from 'react';
 
 export const Chat = () => {
     const messages = useSelector(messagesForCurrentChat);
-    const curUser = useSelector(profileID);
+    const profile = useSelector(profileInfo);
     const { chatID } = useParams();
 
     const handleSendMessage = useCallback(
@@ -35,7 +35,7 @@ export const Chat = () => {
         <div className="chat">
             <div className="chat-msgs">
                 {messages[chatID]?.map((message) => <div key={message.id}>
-                    {message.author === curUser ?
+                    {message.author === profile.username ?
                         <div className={`msg-block curUserTrue`}>
                             <p className="msg-author">{message.author}</p>
                             <p className="msg-text">{message.text}</p>

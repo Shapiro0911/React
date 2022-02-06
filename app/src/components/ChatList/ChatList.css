@@ -7,3 +7,16 @@
     border-right: 1px solid lightgrey;
     width: 522px;
 }
+
+.addChat-container {
+    position: sticky;
+    z-index: 3;
+    bottom: 100px;
+}
+
+.addChat-btn {
+    position: absolute;
+    height: 56px;
+    width: 56px;
+    right: 14px;
+}

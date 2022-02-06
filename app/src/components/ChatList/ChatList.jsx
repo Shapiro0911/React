@@ -6,18 +6,22 @@ import { TextField } from "@mui/material";
 import { ChatItem } from '../ChatItem/ChatItem';
 import { Navigation } from '../Navigation/Navigation';
 import { selectChat } from '../../store/chats/selectors';
-import { profileID } from '../../store/profile/selectors';
+import { profileInfo } from '../../store/profile/selectors';
 import { initMessagesTracking } from '../../store/chatMsgs/actions';
+import { initProfileTracking } from '../../store/profile/actions';
 
 export const ChatList = () => {
     const chatList = useSelector(selectChat);
-    const profile = useSelector(profileID);
+    const profile = useSelector(profileInfo);
     const dispatch = useDispatch();
     const [value, setValue] = useState("");
+
     useEffect(() => {
-        dispatch(initChatsTracking());
+        dispatch(initChatsTracking(profile.userID));
         // eslint-disable-next-line
-        dispatch(initMessagesTracking());
+        dispatch(initMessagesTracking(profile.userID));
+        // eslint-disable-next-line
+        dispatch(initProfileTracking(profile.userID));
         // eslint-disable-next-line
     }, [])
 
@@ -28,7 +32,7 @@ export const ChatList = () => {
     const handleAddChat = (form) => {
         form.preventDefault();
         const newID = `chat${Date.now()}`;
-        dispatch(addChat(profile, { name: value, id: newID }));
+        dispatch(addChat(profile.userID, { name: value, id: newID }));
         setValue("");
     };
 
@@ -46,6 +50,9 @@ export const ChatList = () => {
                 <TextField value={value} onChange={handleChange} />
                 <button>Add chat</button>
             </form>
+            <div className="addChat-container">
+                <button className="msg-submit addChat-btn"></button>
+            </div>
         </div>
     )
 }

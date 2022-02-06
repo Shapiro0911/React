@@ -1,13 +1,13 @@
 import { useState, useRef } from 'react';
 import './Form.css'
 import { useSelector } from 'react-redux';
-import { profileID } from '../../store/profile/selectors'
+import { profileInfo } from '../../store/profile/selectors'
 import { Icon } from '@iconify/react';
 import telegramPlane from '@iconify/icons-fa-brands/telegram-plane';
 
 export const Form = ({ sendMessage }) => {
     const [value, setValue] = useState('');
-    const curUser = useSelector(profileID)
+    const profile = useSelector(profileInfo)
     const inputRef = useRef(null);
 
     const handleChange = (text) => {
@@ -18,7 +18,7 @@ export const Form = ({ sendMessage }) => {
         form.preventDefault();
         sendMessage({
             text: value,
-            author: curUser,
+            author: profile.username,
             id: `mes-${Date.now()}`,
         });
         setValue('');
