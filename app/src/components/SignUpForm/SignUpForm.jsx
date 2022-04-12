@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Button } from '@mui/material';
 import { Navigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { signUpStore } from "../../store/profile/actions";
@@ -46,13 +45,14 @@ export const SignUpForm = ({ onSubmit, loading, error }) => {
     return (
         <>
             <form className="signForm">
-                <label htmlFor="signUp-usernanme" className="login-label">username</label>
-                <input type="text" placeholder="Name" className="msg-input login-input" id="signUp-username" value={username} onChange={handleChangeName} autoFocus />
-                <label htmlFor="login-email" className="login-label">Email</label>
-                <input type="email" placeholder="example@gmail.com" className="msg-input login-input" id="login-email" value={email} onChange={handleChangeEmail} autoFocus />
-                <label htmlFor="login-password" className="login-label">password</label>
-                <input type="password" placeholder="Password" className="msg-input login-input" id="login-password" value={password} onChange={handleChangePassword} />
-                <Button onClick={handleSubmit} variant="contained">Sign Up</Button>
+                <label htmlFor="signUp-usernanme" className="login-label">Name*</label>
+                <input type="text" placeholder="Enter your name" className="msg-input login-input" id="signUp-username" value={username} onChange={handleChangeName} autoFocus />
+                <label htmlFor="login-email" className="login-label">Email*</label>
+                <input type="email" placeholder="Enter your email" className="msg-input login-input" id="login-email" value={email} onChange={handleChangeEmail} autoFocus />
+                <label htmlFor="login-password" className="login-label">Password*</label>
+                <input type="password" placeholder="Enter your password" className="msg-input login-input" id="login-password" value={password} onChange={handleChangePassword} />
+                <p className="login-text">Must be at least 6 digits</p>
+                <button onClick={handleSubmit} className="login-btn">Create account</button>
             </form>
             {error && <h4>{error}</h4>}
         </>

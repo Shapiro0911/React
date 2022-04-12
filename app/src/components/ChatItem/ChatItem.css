@@ -1,3 +1,11 @@
+.active {
+    background-color: lightblue;
+}
+
+.active:hover {
+    background-color: lightblue !important;
+}
+
 .chatItem-btn {
     display: flex;
     padding: 7px 14px;
@@ -6,12 +14,20 @@
     position: relative;
     overflow: hidden;
     text-align: left;
+    cursor: pointer;
+}
+
+.chatItem-btn:hover {
+    background-color: #f3f3f5;
 }
 
 .deleteChat-btn {
-    margin-left: auto;
-    height: 40px;
+    margin-left: 4px;
     z-index: 2;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-bottom: auto;
 }
 
 .chatItem-text {
@@ -20,6 +36,7 @@
     background-color: transparent;
     z-index: 2;
     max-width: 80%;
+    margin-left: 14px;
 }
 
 .chatname {
@@ -37,25 +54,14 @@
     text-overflow: ellipsis;
 }
 
-.fillContainer {
-    transform: scale(0);
-    border-radius: 100%;
-    position: absolute;
-    opacity: 0;
-    background-color: lightblue;
-    z-index: 1;
-    animation: fill 850ms;
-    animation-fill-mode: forwards;
+.chatItem-time {
+    margin-left: auto;
+    font-size: 14px;
+    color: gray;
 }
 
-@keyframes fill {
-    to {
-        opacity: 1;
-        transform: scale(1);
-        border-radius: 0%;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-    }
+.avatar {
+    width: 56px;
+    height: auto;
+    border-radius: 50%;
 }

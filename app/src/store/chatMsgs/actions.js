@@ -38,7 +38,7 @@ export const sendMessageWithReply = (chatID, newMessage) => (dispatch) => {
 export const initMessagesTracking = (userID) => (dispatch) => {
     onValue(messagesRef, (snapshot) => {
         const chatMessages = {};
-        const curUser = userID
+        const curUser = userID;
         snapshot.forEach((chatMsgsSnap) => {
             onValue(usersRef, (snapshot) => {
                 snapshot.forEach((userSnap) => {

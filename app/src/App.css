@@ -19,3 +19,7 @@ li {
   text-decoration: none;
   color: black;
 }
+
+body {
+  overflow: hidden;
+}

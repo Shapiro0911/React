@@ -2,6 +2,7 @@
     overflow-x: clip;
     overflow-y: auto;
     margin-top: auto;
+    padding: 40px;
 }
 
 .chat {
@@ -24,12 +25,15 @@
     text-align: left;
     font-size: 18px;
     max-width: 700px;
-    overflow-wrap:break-word;
+    overflow-wrap: break-word;
+    display: flex;
 }
 
 .msg-author {
     margin: unset;
     font-weight: 600;
+    text-align: left;
+    margin-bottom: 4px;
 }
 
 .curUserTrue {
@@ -40,5 +44,22 @@
 
 .msg-text {
     margin: unset;
+    padding: 14px;
+    background-color: #f2f3f7;
+    border-radius: 0 10px 10px 10px;
 }
 
+.curUserTrue .msg-text {
+    background-color: #6176f3;
+    border-radius: 10px 0 10px 10px;
+    color: #ebedfc;
+}
+
+.curUserTrue .msg-author {
+    text-align: right;
+}
+
+.msg-avatar {
+    width: 40px !important;
+    margin: 0 14px;
+}

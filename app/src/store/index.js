@@ -6,13 +6,14 @@ import thunk from 'redux-thunk'
 import storage from 'redux-persist/lib/storage'
 import { persistReducer, persistStore } from 'redux-persist';
 import { charactersReducer } from './Characters/reducer';
+import { contactsReducer } from './contacts/reducer';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const config = {
     key: 'messanger',
     storage,
-    blacklist: ['characters']
+    blacklist: ['characters', 'contacts']
 }
 
 const persistedReducer = persistReducer(
@@ -21,6 +22,7 @@ const persistedReducer = persistReducer(
         profile: profileReducer,
         chats: chatsReducer,
         chatMsgs: chatMsgsReducer,
+        contacts: contactsReducer,
         characters: charactersReducer
     })
 );

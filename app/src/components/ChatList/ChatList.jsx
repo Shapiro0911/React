@@ -1,58 +1,68 @@
 import './ChatList.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { addChat, initChatsTracking } from '../../store/chats/actions';
+import { initChatsTracking } from '../../store/chats/actions';
 import { useEffect, useState } from 'react';
-import { TextField } from "@mui/material";
 import { ChatItem } from '../ChatItem/ChatItem';
 import { Navigation } from '../Navigation/Navigation';
 import { selectChat } from '../../store/chats/selectors';
 import { profileInfo } from '../../store/profile/selectors';
 import { initMessagesTracking } from '../../store/chatMsgs/actions';
 import { initProfileTracking } from '../../store/profile/actions';
+import { messagesForCurrentChat } from "../../store/chatMsgs/selectors";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'
+import { ContactList } from '../ContactList/ContactList';
 
 export const ChatList = () => {
     const chatList = useSelector(selectChat);
     const profile = useSelector(profileInfo);
+    const messages = useSelector(messagesForCurrentChat);
     const dispatch = useDispatch();
-    const [value, setValue] = useState("");
+    const [contactsVisible, setContactsVisibility] = useState(false);
+    const [menuVisible, setMenuVisibility] = useState(false);
 
     useEffect(() => {
         dispatch(initChatsTracking(profile.userID));
-        // eslint-disable-next-line
         dispatch(initMessagesTracking(profile.userID));
-        // eslint-disable-next-line
         dispatch(initProfileTracking(profile.userID));
         // eslint-disable-next-line
     }, [])
 
-    const handleChange = (name) => {
-        setValue(name.target.value);
-    };
+    const handleClick = () => {
+        menuVisible ? setMenuVisibility(false) : setMenuVisibility(true);
+    }
 
-    const handleAddChat = (form) => {
-        form.preventDefault();
-        const newID = `chat${Date.now()}`;
-        dispatch(addChat(profile.userID, { name: value, id: newID }));
-        setValue("");
-    };
+    const showContacts = () => {
+        setContactsVisibility(true);
+    }
 
     return (
         <div className="chatList">
             <Navigation />
             <ul>
-                {chatList.map((chat) =>
-                    <li key={chat.id}>
-                        <ChatItem chat={chat} />
-                    </li>
-                )}
+                {chatList.map((chat) => {
+                    if (messages[chat.id]?.length > 0) {
+                        return (
+                            <li key={chat.id}>
+                                <ChatItem chat={chat} />
+                            </li>)
+                    } else return null;
+                })}
             </ul>
-            <form onSubmit={handleAddChat} className="messageForm">
-                <TextField value={value} onChange={handleChange} />
-                <button>Add chat</button>
-            </form>
             <div className="addChat-container">
-                <button className="msg-submit addChat-btn"></button>
+                <button className="addChat-btn" onClick={handleClick}>
+                    <FontAwesomeIcon className='pencil' icon={faPencilAlt} />
+                </button>
+                {menuVisible &&
+                    <div className="nav-menu addChat-menu">
+                        <ul>
+                            <li>
+                                <div onClick={showContacts}>New Message</div>
+                            </li>
+                        </ul>
+                    </div>}
             </div>
+            {contactsVisible && <ContactList />}
         </div>
     )
 }

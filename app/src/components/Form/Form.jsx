@@ -3,6 +3,8 @@ import './Form.css'
 import { useSelector } from 'react-redux';
 import { profileInfo } from '../../store/profile/selectors'
 import { Icon } from '@iconify/react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPaperclip, faSmile } from '@fortawesome/free-solid-svg-icons'
 import telegramPlane from '@iconify/icons-fa-brands/telegram-plane';
 
 export const Form = ({ sendMessage }) => {
@@ -27,7 +29,13 @@ export const Form = ({ sendMessage }) => {
 
     return (
         <form className="msg-form">
+            <div className="paperclip">
+                <FontAwesomeIcon icon={faPaperclip} />
+            </div>
             <input ref={inputRef} placeholder="Write a message..." className="msg-input" value={value} onChange={handleChange} autoFocus />
+            <div className="paperclip">
+                <FontAwesomeIcon icon={faSmile} />
+            </div>
             <button onClick={handleSubmit} className="msg-submit">
                 <Icon className="plane-icon" icon={telegramPlane} />
             </button>

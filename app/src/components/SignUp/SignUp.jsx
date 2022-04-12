@@ -25,7 +25,10 @@ export const SignUp = () => {
         <div className="sign-screen">
             <SignUpForm onSubmit={handleSignUp} error={error} loading={loading} />
             <div className="login-opt">
-                <Link to='/' className="link">Already have an account?</Link>
+                <p className="login-text">
+                    Already have an account?
+                    <Link to='/' className="login-link">Log in</Link>
+                </p>
             </div>
         </div>
     )

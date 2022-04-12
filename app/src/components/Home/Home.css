@@ -3,9 +3,21 @@
     flex-direction: column;
     width: 500px;
     margin: auto;
-    margin-top: 20vh;
+    margin-top: 10vh;
 }
 
 .login-opt {
     margin-top: 14px;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 60px;
+    color: black;
+    margin-bottom: 14px;
+}
+
+.welcome {
+    color: #a2a1a9;
+    margin-top: 0;
 }

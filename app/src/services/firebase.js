@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth"
+import { getStorage, ref as sRef } from "firebase/storage";
 import { getDatabase, ref } from "firebase/database"
 
 const firebaseConfig = {
@@ -14,6 +15,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
+
+const storage = getStorage(app);
+
+export const storageRef = sRef(storage, "images/pic.jpg");
 
 export const signUp = async (email, password) => {
     await createUserWithEmailAndPassword(auth, email, password);

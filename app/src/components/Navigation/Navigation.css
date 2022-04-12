@@ -27,13 +27,31 @@
     position: absolute;
     background-color: white;
     border-radius: 10px;
-    box-shadow: 3px 2px 10px 2px rgba(211, 201, 201, 0.904);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     top: 60px;
     z-index: 3;
-    padding: 14px;
+    padding: 8px;
+    font-size: 18px;
+    width: 100px;
+    text-align: left;
 }
 
-.ripple {
+.nav-menu-item {
+    height: 32px;
+    display: flex;
+    align-items: center;
+}
+
+.nav-menu-item:hover {
+    background-color: #f3f3f5;
+}
+
+.nav-link {
+    margin-left: 4px;
+    display: flex;
+}
+
+.nav-btn {
     position: relative;
     border-radius: 100%;
     overflow: hidden;
@@ -46,19 +64,29 @@
     cursor: pointer;
 }
 
-.ripple:hover {
+.nav-btn:hover {
     background-color: rgba(231, 229, 229, 0.897);
 }
 
-.ripple .rippleContainer {
+.nav-icon {
+    color: #a2a1a9;
+    font-size: 20px;
+    width: 20px;
+    margin-right: 8px;
+}
+
+.rippleContainer {
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
+}
+
+.rippleContainer span {
+    position: absolute;
     transform: scale(0);
     border-radius: 100%;
-    position: absolute;
     opacity: 0.75;
     background-color: rgba(102, 102, 102, 0.596);
     animation: ripple 850ms;
@@ -66,7 +94,7 @@
 
 @keyframes ripple {
     to {
-      opacity: 0;
-      transform: scale(1);
+        opacity: 0;
+        transform: scale(2);
     }
 }

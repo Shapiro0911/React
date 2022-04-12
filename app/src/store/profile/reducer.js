@@ -6,7 +6,8 @@ const initialState = {
         userID: '',
         username: '',
         userEmail: ''
-    }
+    },
+    friends: ["cO4JZSiuhMTNeDnXZoVbRbm7kfD2", "eqtZerw7CVTex3dfpLN8PE4mxKS2"]
 }
 
 export const profileReducer = (state = initialState, { payload, type }) => {

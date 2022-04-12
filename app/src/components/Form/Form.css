@@ -1,23 +1,23 @@
 .msg-submit {
-    width: 60px;
-    border-radius: 100%;
-    background-color: rgb(43, 107, 190);
+    background-color: transparent;
     border: none;
     cursor: pointer;
+    height: 44px;
+    width: 44px;
 }
-  
+
 .msg-input {
-    height: 56px;
+    height: 46px;
     width: 100%;
-    outline: lightblue;
     border: none;
-    outline: lightblue;
-    padding: 14px;
-    border-radius: 40px;
-    background-color: rgb(243, 243, 243);
+    padding: 4px;
+    outline: none;
+    border-radius: 10px;
     flex-grow: 1;
     box-sizing: border-box;
     margin-right: 14px;
+    font-size: 18px;
+    background-color: #f6f7fb;
 }
 
 .msg-form {
@@ -26,9 +26,23 @@
     margin-left: 180px;
     margin-right: 180px;
     margin-bottom: 14px;
+    align-items: center;
+    border: none;
+    background-color: #f6f7fb;
 }
 
 .plane-icon {
-    color: white;
-    font-size: 22px;
+    color: #292c31;
+    font-size: 20px;
+}
+
+.paperclip {
+    color: #a2a1a9;
+    font-size: 20px;
+    cursor: pointer;
+    height: 100%;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

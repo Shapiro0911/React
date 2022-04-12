@@ -27,9 +27,13 @@ export const Home = () => {
 
     return (
         <div className="sign-screen">
+            <h1 className="title">Hey there</h1>
+            <h4 className="welcome">Welcome to my Chat(Pet project)</h4>
             <SignForm onSubmit={handleSignIn} error={error} loading={loading} />
             <div className="login-opt">
-                <Link className="link" to="/signup">Register</Link>
+                <p className="login-text">  First time here?
+                    <Link className="login-link" to="/signup">Register</Link>
+                </p>
             </div>
         </div>)
 

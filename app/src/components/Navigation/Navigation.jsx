@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faUser, faCog } from '@fortawesome/free-solid-svg-icons'
 import './Navigation.css'
 import { useState, useRef, useEffect } from 'react';
 
 export const Navigation = () => {
     const [menuVisible, setMenuVisibility] = useState(false);
-    const [ripple, setRipple] = useState({});
-    const cleanUp = useRef(false)
+    const cleanUp = useRef(false);
+    const [rippleArray, setRippleArray] = useState([]);
+    const [timeout, setRippleTimeout] = useState(null);
 
     const handleClick = () => {
         menuVisible ? setMenuVisibility(false) : setMenuVisibility(true);
@@ -19,15 +20,15 @@ export const Navigation = () => {
         const pos = rippleContainer.getBoundingClientRect();
         const x = event.pageX - pos.x - (size / 2);
         const y = event.pageY - pos.y - (size / 2);
-        const rippleStyle = { top: y + 'px', left: x + 'px', height: size + 'px', width: size + 'px' };
-        const ripple = { style: rippleStyle, container: 'rippleContainer' }
-        setRipple(ripple);
-        setTimeout(() => {
+        const newRipple = { top: y + 'px', left: x + 'px', height: size + 'px', width: size + 'px' };
+        setRippleArray((prevState) => [...prevState, newRipple]);
+
+        setRippleTimeout(setTimeout(() => {
             if (!cleanUp.current) {
-                const ripple = { style: {}, container: '' }
-                setRipple(ripple);
+                setRippleArray([]);
             }
-        }, 860)
+        }, 4000))
+        clearTimeout(timeout);
     }
 
     useEffect(() => {
@@ -38,19 +39,38 @@ export const Navigation = () => {
 
     return (
         <div className="nav">
-            <div className="ripple" onClick={(event) => { handleClick(); showRipple(event); }}>
+            <div className="nav-btn" onClick={handleClick}>
                 <FontAwesomeIcon className='bars' icon={faBars} />
-                <div className={ripple.container} style={ripple.style}></div>
+                <div className="rippleContainer" onMouseDown={showRipple}>
+                    {rippleArray.length > 0 &&
+                        rippleArray.map((ripple, index) => {
+                            return (
+                                <span key={"ripple-" + index} style={ripple}></span>
+                            )
+                        })
+                    }
+                </div>
             </div>
             <input className="nav-search-input" placeholder='Search' />
-            {menuVisible ?
+            {menuVisible &&
                 <div className="nav-menu">
-                    <ul>
-                        <li>
-                            <Link to='/profile' className="link">Profile</Link>
+                    <ul className="nav-menu-list">
+                        <li className="nav-menu-item">
+                            <Link to='/profile' className="link nav-link">
+                                <div className="nav-icon">
+                                    <FontAwesomeIcon icon={faUser} />
+                                </div>
+                                Profile</Link>
+                        </li>
+                        <li className="nav-menu-item">
+                            <Link to='/profile' className="link nav-link">
+                                <div className="nav-icon">
+                                    <FontAwesomeIcon icon={faCog} />
+                                </div>
+                                Settings</Link>
                         </li>
                     </ul>
-                </div> : null}
+                </div>}
         </div>
     )
 }
