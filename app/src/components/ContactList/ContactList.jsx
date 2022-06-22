@@ -1,5 +1,6 @@
 import { ChatItem } from '../ChatItem/ChatItem';
 import { ContactItem } from './ContactItem/ContactItem';
+import { Navigation } from '../Navigation/Navigation';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from 'react';
 import { selectChat } from '../../store/chats/selectors';
@@ -9,11 +10,8 @@ import { profileFriends, profileInfo } from '../../store/profile/selectors';
 import { messagesForCurrentChat } from "../../store/chatMsgs/selectors"
 import { getContacts } from '../../store/contacts/selector';
 import { useNavigate } from "react-router-dom";
-import { NavSearch } from '../Navigation/NavSearch/NavSearch';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
-export const ContactList = ({ setContactsVisibility }) => {
+export const ContactList = () => {
     const chatList = useSelector(selectChat);
     const friends = useSelector(profileFriends);
     const profile = useSelector(profileInfo);
@@ -37,10 +35,6 @@ export const ContactList = ({ setContactsVisibility }) => {
         dispatch(addChat(chatNames, chatContacts, newID));
     }
 
-    const hideContacts = () => {
-        setContactsVisibility(false);
-    }
-
     useEffect(() => {
         if (chatID) {
             navigate(`../${chatID}`);
@@ -50,12 +44,7 @@ export const ContactList = ({ setContactsVisibility }) => {
 
     return (
         <div className="chatList">
-            <div className="nav">
-                <div className="nav-btn" onClick={hideContacts}>
-                    <FontAwesomeIcon className='return' icon={faArrowLeft} />
-                </div>
-                <NavSearch />
-            </div>
+            <Navigation />
             <ul>
                 {chatList.map((chat) => {
                     if (messages[chat.id]?.length > 0) {

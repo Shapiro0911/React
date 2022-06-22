@@ -37,7 +37,7 @@ export const ChatList = () => {
     }
 
     return (
-        !contactsVisible ? <div className="chatList">
+        <div className="chatList">
             <Navigation />
             <ul>
                 {chatList.map((chat) => {
@@ -62,6 +62,7 @@ export const ChatList = () => {
                         </ul>
                     </div>}
             </div>
-        </div> : <ContactList setContactsVisibility={setContactsVisibility} />
+            {contactsVisible && <ContactList />}
+        </div>
     )
 }
