@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faUser, faCog } from '@fortawesome/free-solid-svg-icons'
 import './Navigation.css'
 import { useState, useRef, useEffect } from 'react';
-import { NavSearch } from './NavSearch/NavSearch';
 
 export const Navigation = () => {
     const [menuVisible, setMenuVisibility] = useState(false);
@@ -52,7 +51,7 @@ export const Navigation = () => {
                     }
                 </div>
             </div>
-            <NavSearch />
+            <input className="nav-search-input" placeholder='Search' />
             {menuVisible &&
                 <div className="nav-menu">
                     <ul className="nav-menu-list">
