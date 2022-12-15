@@ -13,7 +13,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const config = {
     key: 'messanger',
     storage,
-    blacklist: ['characters', 'contacts']
+    blacklist: ['characters']
 }
 
 const persistedReducer = persistReducer(

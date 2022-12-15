@@ -20,20 +20,18 @@ export const setMessages = (messageList) => ({
     payload: messageList
 })
 
-let timeout;
-
-export const sendMessageWithReply = (chatID, newMessage) => (dispatch) => {
-    dispatch(sendMessage(chatID, newMessage));
-    if (newMessage.author === "human") {
-        if (timeout) {
-            clearTimeout(timeout);
-        }
-        timeout = setTimeout(() => {
-            const botMessage = { id: `mes-${Date.now()}`, text: "Hello", author: 'bot' };
-            dispatch(sendMessage(chatID, botMessage));
-        }, 1500)
-    }
-}
+// export const sendMessageWithReply = (chatID, newMessage) => (dispatch) => {
+//     dispatch(sendMessage(chatID, newMessage));
+//     if (newMessage.author === "human") {
+//         if (timeout) {
+//             clearTimeout(timeout);
+//         }
+//         timeout = setTimeout(() => {
+//             const botMessage = { id: `mes-${Date.now()}`, text: "Hello", author: 'bot' };
+//             dispatch(sendMessage(chatID, botMessage));
+//         }, 1500)
+//     }
+// }
 
 export const initMessagesTracking = (userID) => (dispatch) => {
     onValue(messagesRef, (snapshot) => {

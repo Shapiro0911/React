@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { selectChat } from '../../store/chats/selectors';
 import { addChat } from '../../store/chats/actions';
 import { initContactsTracking } from '../../store/contacts/actions';
-import { profileFriends, profileInfo } from '../../store/profile/selectors';
+import { profileInfo } from '../../store/profile/selectors';
 import { messagesForCurrentChat } from "../../store/chatMsgs/selectors"
 import { getContacts } from '../../store/contacts/selector';
 import { useNavigate } from "react-router-dom";
@@ -15,7 +15,6 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
 export const ContactList = ({ setContactsVisibility }) => {
     const chatList = useSelector(selectChat);
-    const friends = useSelector(profileFriends);
     const profile = useSelector(profileInfo);
     const contacts = useSelector(getContacts);
     const messages = useSelector(messagesForCurrentChat);
@@ -25,7 +24,7 @@ export const ContactList = ({ setContactsVisibility }) => {
     const [chatID, setChatID] = useState(null);
 
     useEffect(() => {
-        dispatch(initContactsTracking(friends));
+        dispatch(initContactsTracking(profile.userID));
         // eslint-disable-next-line
     }, [])
 
